@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Fire Stylish Nickname Generator</title>
+
+<meta name="description" content="Create stylish Free Fire nicknames with our free nickname generator.">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at top left,#7c3aed 0%,transparent 35%),
+      radial-gradient(circle at top right,#06b6d4 0%,transparent 35%),
+      linear-gradient(135deg,#08001c,#13003b,#001b3d);
+    color:white;
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#ff00cc;
+    filter:blur(140px);
+    opacity:.25;
+    top:20%;
+    left:-120px;
+    pointer-events:none;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#00eaff;
+    filter:blur(140px);
+    opacity:.22;
+    bottom:0;
+    right:-120px;
+    pointer-events:none;
+}
+
+.container{
+    width:min(100%,1000px);
+    margin:auto;
+    padding:18px;
+    position:relative;
+    z-index:2;
+}
+
+/* TOP AD */
+
+.ad{
+    min-height:75px;
+    margin:10px 0 18px;
+    border:2px dashed rgba(255,255,255,.4);
+    border-radius:18px;
+    background:rgba(255,255,255,.07);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:14px;
+    letter-spacing:.5px;
+    backdrop-filter:blur(10px);
+}
+
+/* HEADER */
+
+.logo{
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    color:#67e8f9;
+    letter-spacing:2px;
+    margin:8px 0 20px;
+}
+
+.card{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.20);
+    border-radius:30px;
+    padding:35px 22px;
+    box-shadow:0 20px 70px rgba(0,0,0,.35);
+    backdrop-filter:blur(18px);
+}
+
+.hero{
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    background:linear-gradient(90deg,#ff00cc,#7928ca,#00d4ff);
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(32px,7vw,62px);
+    line-height:1.05;
+    font-weight:900;
+    background:linear-gradient(90deg,#fff,#67e8f9,#f0abfc,#fff);
+    -webkit-background-clip:text;
+    color:transparent;
+    margin-bottom:18px;
+}
+
+.subtitle{
+    font-size:17px;
+    color:#dbeafe;
+    line-height:1.6;
+    max-width:650px;
+    margin:auto;
+}
+
+.main-button{
+    margin-top:28px;
+    border:none;
+    padding:17px 34px;
+    border-radius:50px;
+    color:white;
+    font-size:17px;
+    font-weight:800;
+    cursor:pointer;
+    background:linear-gradient(90deg,#ff0080,#7928ca,#00c6ff);
+    box-shadow:0 10px 35px rgba(0,198,255,.28);
+    transition:.25s;
+}
+
+.main-button:hover{
+    transform:translateY(-3px) scale(1.02);
+}
+
+/* PAGE 2 */
+
+#page2,#results{
+    display:none;
+}
+
+.input-title{
+    text-align:center;
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.input-subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:25px;
+}
+
+.name-input{
+    width:100%;
+    max-width:650px;
+    display:block;
+    margin:auto;
+    padding:18px 20px;
+    border-radius:18px;
+    border:2px solid rgba(255,255,255,.25);
+    outline:none;
+    background:rgba(0,0,0,.25);
+    color:white;
+    font-size:18px;
+    text-align:center;
+}
+
+.name-input::placeholder{
+    color:#cbd5e1;
+}
+
+.name-input:focus{
+    border-color:#67e8f9;
+    box-shadow:0 0 25px rgba(103,232,249,.2);
+}
+
+.generate{
+    display:block;
+    margin:20px auto 0;
+}
+
+/* RESULTS */
+
+.result-heading{
+    text-align:center;
+    font-size:32px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.result-info{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:25px;
+}
+
+.names{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+}
+
+.name-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:16px;
+    border-radius:18px;
+    background:linear-gradient(
+      135deg,
+      rgba(124,58,237,.30),
+      rgba(6,182,212,.16)
+    );
+    border:1px solid rgba(255,255,255,.18);
+    transition:.2s;
+}
+
+.name-card:hover{
+    transform:translateY(-3px);
+    border-color:#67e8f9;
+}
+
+.nickname{
+    font-size:20px;
+    font-weight:900;
+    word-break:break-word;
+    color:white;
+}
+
+.copy-btn{
+    flex-shrink:0;
+    border:0;
+    border-radius:12px;
+    padding:9px 13px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#fff;
+    color:#16002f;
+}
+
+.copy-btn:active{
+    transform:scale(.95);
+}
+
+.back-btn{
+    display:block;
+    margin:25px auto 0;
+    background:rgba(255,255,255,.12);
+    color:white;
+    border:1px solid rgba(255,255,255,.25);
+    padding:13px 25px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+/* THANK YOU */
+
+.thanks{
+    margin-top:28px;
+    padding:30px 20px;
+    text-align:center;
+    border-radius:25px;
+    background:linear-gradient(
+      135deg,
+      rgba(255,0,128,.20),
+      rgba(0,212,255,.18)
+    );
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.thanks h2{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.thanks p{
+    color:#dbeafe;
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:25px 10px;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+        padding:12px;
+    }
+
+    .card{
+        padding:28px 15px;
+        border-radius:24px;
+    }
+
+    .names{
+        grid-template-columns:1fr;
+    }
+
+    .nickname{
+        font-size:18px;
+    }
+
+    .ad{
+        min-height:65px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- AD PLACEHOLDER 1 -->
+    <div class="ad">
+        Ad will be played
+    </div>
+
+    <!-- PAGE 1 -->
+    <section id="page1">
+
+        <div class="logo">
+            ✦ FREE FIRE NICKNAME STUDIO ✦
+        </div>
+
+        <div class="card hero">
+
+            <div class="badge">
+                FREE • STYLISH • INSTANT
+            </div>
+
+            <h1>
+                Create Your<br>
+                Free Fire Nickname
+            </h1>
+
+            <p class="subtitle">
+                Create stylish, cool and unique Free Fire nickname designs
+                in seconds. Enter your name and discover amazing designs.
+            </p>
+
+            <button class="main-button" onclick="openPage2()">
+                ✨ CONTINUE ✨
+            </button>
+
+        </div>
+
+        <!-- AD PLACEHOLDER 2 -->
+        <div class="ad">
+            Ad will be played
+        </div>
+
+        <!-- AD PLACEHOLDER 3 -->
+        <div class="ad">
+            Ad will be played
+        </div>
+
+    </section>
+
+
+    <!-- PAGE 2 -->
+    <section id="page2">
+
+        <div class="card">
+
+            <div class="input-title">
+                Enter Your Name
+            </div>
+
+            <p class="input-subtitle">
+                Enter your name and press Generate
+            </p>
+
+            <input
+                id="nameInput"
+                class="name-input"
+                type="text"
+                maxlength="20"
+                placeholder="Enter your name..."
+                onkeydown="if(event.key==='Enter') generateNames()"
+            >
+
+            <button class="main-button generate" onclick="generateNames()">
+                🔥 GENERATE NICKNAMES
+            </button>
+
+        </div>
+
+        <!-- AD PLACEHOLDER 4 -->
+        <div class="ad">
+            Ad will be played
+        </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+    <section id="results">
+
+        <div class="card">
+
+            <div class="result-heading">
+                🎮 Your Stylish Nicknames
+            </div>
+
+            <p class="result-info">
+                Choose any nickname and tap Copy.
+            </p>
+
+            <div id="names" class="names"></div>
+
+        </div>
+
+        <!-- AD PLACEHOLDER 5 -->
+        <div class="ad">
+            Ad will be played
+        </div>
+
+        <!-- AD PLACEHOLDER 6 -->
+        <div class="ad">
+            Ad will be played
+        </div>
+
+
+        <div class="thanks">
+
+            <h2>💙 Thanks for visiting our website!</h2>
+
+            <p>
+                If you like this website, share it with your friends
+                and help them create stylish Free Fire nicknames.
+                If you have a YouTube channel, you can also upload
+                and share this website with your viewers.
+            </p>
+
+        </div>
+
+        <button class="back-btn" onclick="startAgain()">
+            ← Create Another Nickname
+        </button>
+
+    </section>
+
+
+    <!-- AD PLACEHOLDER 7 -->
+    <div class="ad">
+        Ad will be played
+    </div>
+
+    <footer>
+        © 2026 Free Fire Nickname Studio
+    </footer>
+
+</div>
+
+
+<script>
+
+function openPage2(){
+
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    setTimeout(function(){
+        document.getElementById("nameInput").focus();
+    },300);
+}
+
+
+function generateNames(){
+
+    let name =
+        document.getElementById("nameInput").value.trim();
+
+    if(name === ""){
+        alert("Please enter your name first.");
+        return;
+    }
+
+    let designs = [
+
+        "꧁༺"+name+"༻꧂",
+        "꧁"+name+"꧂",
+        "『"+name+"』",
+        "亗 "+name+" 亗",
+        "乂 "+name+" 乂",
+        "么 "+name+" 么",
+        "★彡"+name+"彡★",
+        "彡"+name+"彡",
+        "メ"+name+"メ",
+        "ツ "+name+" ツ",
+        "々"+name+"々",
+        "乛"+name+"乛",
+        "〆"+name+"〆",
+        "シ"+name+"シ",
+        "㊙ "+name+" ㊙",
+        "♛"+name+"♛",
+        "♕ "+name+" ♕",
+        "♚"+name+"♚",
+        "⚡"+name+"⚡",
+        "🔥"+name+"🔥",
+        "☠ "+name+" ☠",
+        "☯ "+name+" ☯",
+        "★ "+name+" ★",
+        "☆ "+name+" ☆",
+        "✦"+name+"✦",
+        "✧ "+name+" ✧",
+        "✰"+name+"✰",
+        "✯"+name+"✯",
+        "❖ "+name+" ❖",
+        "◆"+name+"◆",
+        "◇ "+name+" ◇",
+        "『★"+name+"★』",
+        "『⚡"+name+"⚡』",
+        "『🔥"+name+"🔥』",
+        "『亗"+name+"亗』",
+        "꧁★"+name+"★꧂",
+        "꧁⚡"+name+"⚡꧂",
+        "꧁🔥"+name+"🔥꧂",
+        "꧁亗"+name+"亗꧂",
+        "꧁༒"+name+"༒꧂",
+        "༺"+name+"༻",
+        "༒ "+name+" ༒",
+        "☬ "+name+" ☬",
+        "⚔ "+name+" ⚔",
+        "♠ "+name+" ♠",
+        "♣ "+name+" ♣",
+        "♥ "+name+" ♥",
+        "♦ "+name+" ♦",
+        "★彡["+name+"]彡★",
+        "乂["+name+"]乂",
+        "亗["+name+"]亗",
+        "『"+name+"』ツ",
+        "メ["+name+"]メ",
+        "〆["+name+"]〆",
+        "么["+name+"]么",
+        "ツ["+name+"]ツ",
+        "☠︎["+name+"]☠︎",
+        "⚡["+name+"]⚡",
+        "🔥["+name+"]🔥",
+        "♛["+name+"]♛",
+        "✦["+name+"]✦",
+        "꧁༺["+name+"]༻꧂",
+        "꧁༒["+name+"]༒꧂"
+    ];
+
+
+    let box = document.getElementById("names");
+
+    box.innerHTML = "";
+
+    designs.forEach(function(nickname,index){
+
+        let card = document.createElement("div");
+        card.className="name-card";
+
+        let text = document.createElement("div");
+        text.className="nickname";
+        text.textContent=nickname;
+
+        let button = document.createElement("button");
+        button.className="copy-btn";
+        button.textContent="COPY";
+
+        button.onclick=function(){
+            copyNickname(nickname,button);
+        };
+
+        card.appendChild(text);
+        card.appendChild(button);
+
+        box.appendChild(card);
+    });
+
+
+    document.getElementById("page2").style.display="none";
+    document.getElementById("results").style.display="block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function copyNickname(text,button){
+
+    navigator.clipboard.writeText(text).then(function(){
+
+        let oldText=button.textContent;
+
+        button.textContent="COPIED ✓";
+
+        setTimeout(function(){
+            button.textContent=oldText;
+        },1200);
+
+    }).catch(function(){
+
+        alert("Nickname: " + text);
+
+    });
+}
+
+
+function startAgain(){
+
+    document.getElementById("results").style.display="none";
+    document.getElementById("page1").style.display="block";
+
+    document.getElementById("nameInput").value="";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
